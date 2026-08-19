@@ -1,12 +1,11 @@
 # Changelog
 
-## 0.1.0
+## 1.0.0 - First Release
 
-- Initial WP-KIT release.
-- Core agent identity and operating rules.
-- WordPress engineering rules.
-- Website, theme, plugin, audit, debugging, and deployment workflows.
-- Project memory structure.
-- WAMP development guidance.
-- Antigravity and OpenCode usage guidance.
-- Quality gates for security, SEO, performance, accessibility, and testing.
+- Added builder detection and adapter registry.
+- Added capability-based compatibility model.
+- Added adapters for major free and paid builders.
+- Added site-level and post-level detection.
+- Added WP Kit Builder Compatibility admin screen.
+- Added generic WordPress fallback.
+- Added third-party adapter registration hook.
