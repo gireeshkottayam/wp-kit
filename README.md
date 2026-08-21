@@ -1,102 +1,143 @@
-# WP Kit v1.0.2
+# WP Kit
 
-**WP Kit — Builder Compatibility + Site Doctor Agent**
+**The Ultimate WordPress Toolkit**
 
-WP Kit is a modular WordPress toolkit designed to understand the website environment, work across major builders and provide evidence-based website health and launch-readiness checks.
+WP Kit is a modular WordPress toolkit for developers, agencies and site owners.
 
-## v1.0.2 — Site Doctor Agent
+## Current Version
 
-The Site Doctor Agent turns WP Kit into a practical website audit and launch-readiness layer.
+**v1.0.3 — Developer Doctor Agent**
 
-Go to:
+### What is Developer Doctor?
+
+Developer Doctor is a developer-focused diagnostic agent that helps find runtime failures and compatibility risks without requiring a developer to manually dig through several logs and configuration screens.
+
+It can inspect:
+
+- PHP fatal and parse errors in `wp-content/debug.log`
+- PHP warnings and deprecations
+- Deprecated WordPress hooks
+- `doing_it_wrong` notices
+- Fatal errors captured from recent requests while WP Kit is active
+- PHP and WordPress runtime versions
+- Debug configuration
+- PHP memory limit
+- Development/beta plugin builds
+- Theme version metadata
+- Responsible component classification where the file path is available
+
+### Why it exists
+
+Query Monitor remains an excellent developer toolbox. WP Kit does not attempt to replace it. Developer Doctor adds a different layer: **incident triage and an AI-ready incident bundle** that can be copied into OpenCode or another coding assistant for diagnosis and patch planning.
+
+### Workflow
 
 ```text
-WordPress Dashboard → Tools → WP Kit Site Doctor
+Developer Doctor
+      ↓
+Collect evidence
+      ↓
+Classify severity
+      ↓
+Identify likely component
+      ↓
+Redact secrets
+      ↓
+Copy incident bundle
+      ↓
+OpenCode / AI diagnosis
+      ↓
+Developer reviews patch
+      ↓
+Test in staging
 ```
 
-Run **Run Full Scan** to inspect the site and receive an overall score, category scores and actionable issues.
+Developer Doctor does **not** automatically edit PHP files, disable plugins, change server configuration, or apply risky fixes.
 
-### Audit engines
+## Install / Update with Git
 
-- SEO
-- AI Search Readiness
-- Performance
-- Security
-- Accessibility
-- Mobile
-- Links
-- Images
-- WordPress configuration
-- Launch readiness
-
-### Safety model
-
-Every issue is classified by severity and risk. The current release is intentionally audit-first: it does **not** blindly modify security, search visibility, server configuration, redirects, caching systems or content.
-
-The architecture is prepared for future safe-fix workflows with verification and rollback.
-
-## v1.0.1 — Builder Compatibility Agent
-
-Supported detection/adapter foundation includes Gutenberg, Elementor, Elementor Pro detection, Avada, Divi, WPBakery, Bricks, Breakdance, Beaver Builder, Oxygen, Brizy, SiteOrigin, Themify, Thrive Architect, Spectra, Kadence Blocks and GenerateBlocks.
-
-Builder-specific behavior is isolated behind `BuilderAdapterInterface`, allowing Site Doctor and future WP Kit features to consume capabilities rather than hard-code builder conditions.
-
-## Development
+From your WordPress plugin directory:
 
 ```bash
-git status
-git pull
+cd wp-content/plugins
 ```
 
-After changes:
+For a new installation:
 
 ```bash
-git diff
-git add .
-git commit -m "Describe your change"
-git push
+git clone https://github.com/gireeshkottayam/wp-kit.git wp-kit
+cd wp-kit
+git checkout v1.0.3
 ```
 
-For a tagged release:
-
-```bash
-git fetch --tags
-git tag -a v1.0.2 -m "WP Kit v1.0.2"
-git push origin v1.0.2
-```
-
-## Antigravity + OpenCode
-
-Open the repository in Antigravity, open its terminal, update the repository, then launch OpenCode from the project directory.
+For an existing Git installation:
 
 ```bash
 cd wp-content/plugins/wp-kit
-
 git status
-git pull
+git fetch --tags
+git checkout v1.0.3
+```
 
+Or update the development branch:
+
+```bash
+git pull
+```
+
+Always review local changes with `git status` before updating.
+
+## Antigravity + OpenCode
+
+Open the WP Kit repository in Antigravity, open the terminal, and verify the working tree:
+
+```bash
+git status
+git fetch --tags
+git checkout v1.0.3
+```
+
+Then launch OpenCode from the repository:
+
+```bash
 opencode
 ```
 
-Always review AI-generated changes before committing:
+Recommended workflow:
 
-```bash
-git diff
-git status
+```text
+Review → Diagnose → Patch → Test → git diff → Commit → Push
 ```
 
-## Requirements
+Do not let an AI coding agent blindly overwrite the repository. Review security, database, architecture and compatibility changes before committing.
 
-- WordPress 6.0+
-- PHP 7.4+
+## Existing Agents
 
-The code follows WordPress plugin security and API practices. urlWordPress Plugin Developer Handbookhttps://developer.wordpress.org/plugins/
+### v1.0.1 — Builder Compatibility Agent
 
-## Important limitations
+Provides the adapter foundation for Gutenberg, Elementor, Avada, Divi, WPBakery, Bricks, Breakdance, Beaver Builder, Oxygen, Brizy, SiteOrigin, Themify, Thrive Architect, Spectra, Kadence Blocks, GenerateBlocks and a generic WordPress fallback.
 
-A Site Doctor score is an audit aid, not a guarantee of Google rankings, AI-search visibility, security, WCAG compliance or Core Web Vitals. External lab/field performance data may require dedicated tools or real-user data.
+### v1.0.2 — Site Doctor Agent
 
-`llms.txt` is not treated as a Google Search requirement.
+Provides website health and launch-readiness auditing across SEO, AI Search Readiness, performance, security, accessibility, mobile, links, images and WordPress configuration.
+
+### v1.0.3 — Developer Doctor Agent
+
+Adds developer-focused runtime diagnostics and AI-ready incident triage.
+
+## Safety
+
+Developer Doctor is audit-first. It does not:
+
+- edit PHP source automatically
+- delete plugins/themes/content
+- change DNS
+- change PHP versions
+- disable security plugins
+- change database credentials
+- modify server configuration
+
+Important fixes should be reviewed and tested in staging.
 
 ## License
 
